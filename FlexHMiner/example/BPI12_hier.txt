@@ -1,0 +1,24 @@
+A;A_ACCEPTED
+O;O_CREATED
+A;A_REGISTERED
+A;A_SUBMITTED
+W;W_Nabellen incomplete dossiers
+A;A_ACTIVATED
+O;O_CANCELLED
+W;W_Valideren aanvraag
+O;O_SENT
+W;W_Completeren aanvraag
+O;O_DECLINED
+O;O_ACCEPTED
+A;A_PREACCEPTED
+O;O_SELECTED
+A;A_FINALIZED
+A;A_CANCELLED
+O;O_SENT_BACK
+A;A_DECLINED
+A;A_APPROVED
+W;W_Afhandelen leads
+A;A_PARTLYSUBMITTED
+W;W_Beoordelen fraude
+W;W_Nabellen offertes
+W;W_Wijzigen contractgegevens

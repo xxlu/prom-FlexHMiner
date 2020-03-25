@@ -1,0 +1,24 @@
+1;W_Beoordelen fraude
+1;O_SELECTED
+2;W_Completeren aanvraag
+0;O_ACCEPTED
+0;A_ACTIVATED
+0;A_PREACCEPTED
+0;A_CANCELLED
+2;A_REGISTERED
+2;W_Nabellen offertes
+0;A_FINALIZED
+2;O_DECLINED
+1;O_CREATED
+2;A_SUBMITTED
+0;A_DECLINED
+2;W_Wijzigen contractgegevens
+2;O_SENT_BACK
+0;A_APPROVED
+1;O_SENT
+0;O_CANCELLED
+0;A_PARTLYSUBMITTED
+2;W_Afhandelen leads
+1;W_Valideren aanvraag
+0;A_ACCEPTED
+0;W_Nabellen incomplete dossiers
