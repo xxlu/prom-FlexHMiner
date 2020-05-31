@@ -7,9 +7,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import org.deckfour.xes.classification.XEventClass;
 import org.deckfour.xes.classification.XEventClasses;
@@ -48,6 +51,7 @@ import org.processmining.xlu.experiment.discovery.ExpDiscoveryIM;
 import org.processmining.xlu.experiment.discovery.MarkedPetrinet;
 
 import nl.tue.astar.AStarException;
+import nl.tue.astar.AStarThread.Canceller;
 
 /**
  * @author xlu
@@ -183,28 +187,28 @@ public class ExprReplayUtils {
 		};
 		Future<Object> future = executor.submit(task);
 		ModelQuality quality1 = new ModelQuality();
-//		try {
-//			quality1 = (ModelQuality) future.get(10*60, TimeUnit.SECONDS); 
-//		} catch (TimeoutException ex) {
-//		   // handle the timeout
-////			context.getFutureResult(0).cancel(true);
-//			replayParam.setCanceller(new Canceller() {
-//				
-//				public boolean isCancelled() {
-//					// TODO Auto-generated method stub
-//					return true;
-//				}
-//			});
-//			System.out.println("");
-//			System.out.println("timeout");
-//			quality1.setTimeout(true);
-//		} catch (InterruptedException e) {
-//		   // handle the interrupts
-//		} catch (ExecutionException e) {
-//		   // handle other exceptions
-//		} finally {
-//		   future.cancel(true); // may or may not desire this
-//		}
+		try {
+			quality1 = (ModelQuality) future.get(10*60, TimeUnit.SECONDS); 
+		} catch (TimeoutException ex) {
+		   // handle the timeout
+//			context.getFutureResult(0).cancel(true);
+			replayParam.setCanceller(new Canceller() {
+				
+				public boolean isCancelled() {
+					// TODO Auto-generated method stub
+					return true;
+				}
+			});
+			System.out.println("");
+			System.out.println("timeout");
+			quality1.setTimeout(true);
+		} catch (InterruptedException e) {
+		   // handle the interrupts
+		} catch (ExecutionException e) {
+		   // handle other exceptions
+		} finally {
+		   future.cancel(true); // may or may not desire this
+		}
 		
 		ExpModelSimplicityUtil.computeAllSimplicities(petrinet, quality1);
 		System.out.println(quality1);

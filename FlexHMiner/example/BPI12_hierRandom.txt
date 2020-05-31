@@ -1,24 +1,24 @@
-1;W_Beoordelen fraude
-1;O_SELECTED
-2;W_Completeren aanvraag
-0;O_ACCEPTED
-0;A_ACTIVATED
-0;A_PREACCEPTED
-0;A_CANCELLED
-2;A_REGISTERED
-2;W_Nabellen offertes
-0;A_FINALIZED
-2;O_DECLINED
-1;O_CREATED
-2;A_SUBMITTED
-0;A_DECLINED
-2;W_Wijzigen contractgegevens
-2;O_SENT_BACK
-0;A_APPROVED
-1;O_SENT
-0;O_CANCELLED
-0;A_PARTLYSUBMITTED
-2;W_Afhandelen leads
-1;W_Valideren aanvraag
-0;A_ACCEPTED
-0;W_Nabellen incomplete dossiers
+Sp0;O_SENT
+Sp0;Sp1;W_Wijzigen contractgegevens
+Sp0;O_CREATED
+W_Beoordelen fraude
+Sp0;A_FINALIZED
+W_Afhandelen leads
+Sp0;O_SELECTED
+A_SUBMITTED
+W_Completeren aanvraag
+Sp0;W_Valideren aanvraag
+A_PARTLYSUBMITTED
+Sp0;Sp1;A_APPROVED
+Sp0;Sp1;W_Nabellen incomplete dossiers
+Sp0;Sp1;A_ACTIVATED
+Sp0;A_ACCEPTED
+Sp0;O_CANCELLED
+A_DECLINED
+A_CANCELLED
+Sp0;O_DECLINED
+Sp0;Sp1;A_REGISTERED
+A_PREACCEPTED
+Sp0;O_SENT_BACK
+Sp0;W_Nabellen offertes
+Sp0;Sp1;O_ACCEPTED

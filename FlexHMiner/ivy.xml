@@ -9,8 +9,15 @@
    		<conf name="lib" />
 	</configurations>  
     <dependencies defaultconf="default">
-   		<dependency org="prom" name="ProM-Plugins" rev="latest" changing="true" transitive="true" />
+        <dependency org="commons-lang" name="commons-lang" rev="2.0" transitive="false" />
+		<dependency org="com.google.guava" name="guava-gwt" rev="18.0" transitive="false" />
+		<dependency org="org.eclipse.osgi" name="org.eclipse.osgi" rev="3.7.1"/>
    		<dependency org="prom" name="Log" rev="latest" changing="true" transitive="true" />	
+		<dependency org="prom" name="BasicUtils" rev="latest" changing="true" transitive="true" />
+        <dependency org="prom" name="ProM-Plugins" rev="latest" changing="true" transitive="true" />
+        <dependency org="prom" name="ProM-Contexts" rev="latest" changing="true" transitive="true" />
+        <dependency org="prom" name="ProM-Models" rev="latest" changing="true" transitive="true" />
+        <dependency org="prom" name="ProM-Framework" rev="latest" changing="true" transitive="true" />
    		<dependency org="prom" name="EvolutionaryTreeMiner" rev="latest" changing="true" transitive="true" />	
    		<dependency org="prom" name="ETConformance" rev="latest" changing="true" transitive="true" />	
    		<dependency org="prom" name="InductiveMiner" rev="latest" changing="true" transitive="true" />
@@ -21,7 +28,6 @@
         <dependency org="prom" name="HybridILPMiner" rev="latest" changing="true" transitive="true" />
         <dependency org="prom" name="PartialOrderReplayer" rev="latest" changing="true" transitive="true" />
      	<dependency org="prom" name="ApacheUtils" rev="latest" changing="true" transitive="true" />
- 		<dependency org="prom" name="BasicUtils" rev="latest" changing="true" transitive="true" />
  		<dependency org="prom" name="Widgets" rev="latest" changing="true" transitive="true" />
  		<dependency org="prom" name="Alignment" rev="latest" changing="true" transitive="true" />
  		<dependency org="prom" name="EfficientStorage" rev="latest" changing="true" transitive="true" />

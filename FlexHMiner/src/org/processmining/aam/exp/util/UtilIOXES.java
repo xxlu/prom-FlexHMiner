@@ -15,7 +15,7 @@ import org.processmining.log.csvexport.XesCsvSerializer;
 public class UtilIOXES {
 	
 	public static XLog importXesLog(String logname) {
-		String readlogfilename = ".\\logs\\";
+		String readlogfilename = "./logs/";
 		XesXmlParser parser = new XesXmlParser();
 		String f = readlogfilename + logname + ".xes";
 		XLog log = null;
@@ -28,7 +28,7 @@ public class UtilIOXES {
 	}
 	
 	public static XLog importXesGZLog(String logname) {
-		String readlogfilename = ".//logs//";
+		String readlogfilename = "./logs/";
 		XesXmlGZIPParser parser = new XesXmlGZIPParser(); 
 		
 

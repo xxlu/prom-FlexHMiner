@@ -21,6 +21,7 @@ import org.deckfour.xes.model.XTrace;
 import org.processmining.aam.AbstractionAwareMiner;
 import org.processmining.aam.HierarchyMainPanel;
 import org.processmining.aam.alg.ActivityClusteringAlg;
+import org.processmining.aam.alg.ActivityClusteringAlgFreq;
 import org.processmining.aam.alg.ActivityClusteringAlgFull;
 import org.processmining.aam.exp.input.UtilDataVUMC;
 import org.processmining.aam.exp.util.ExpDummyPluginContext;
@@ -28,6 +29,7 @@ import org.processmining.aam.exp.util.ExpModelSimplicityUtil;
 import org.processmining.aam.exp.util.ExprReplayUtils;
 import org.processmining.aam.exp.util.ModelQuality;
 import org.processmining.aam.exp.util.UtilIO;
+import org.processmining.aam.exp.util.UtilIOXES;
 import org.processmining.aam.model.ActTreeNode;
 import org.processmining.contexts.uitopia.UIPluginContext;
 import org.processmining.contexts.uitopia.annotations.UITopiaVariant;
@@ -35,6 +37,7 @@ import org.processmining.contexts.uitopia.annotations.Visualizer;
 import org.processmining.framework.plugin.PluginContext;
 import org.processmining.framework.plugin.annotations.Plugin;
 import org.processmining.framework.plugin.annotations.PluginVariant;
+import org.processmining.models.graphbased.directed.petrinet.Petrinet;
 import org.processmining.xlu.experiment.discovery.ExpDiscoveryAlgorithm;
 import org.processmining.xlu.experiment.discovery.ExpDiscoveryIMf;
 import org.processmining.xlu.experiment.discovery.MarkedPetrinet;
@@ -65,15 +68,15 @@ public class HAIMexperiment {
 		});
 	}
 
-	@Plugin(name = "HAIM experiment", returnLabels = { "Hierarchy" }, returnTypes = {
-			JComponent.class }, parameterLabels = {}, userAccessible = true)
+	@Plugin(name = "HAIM experiment", returnLabels = {"Hierarchy"}, 
+			returnTypes = {ActTreeNode.class}, parameterLabels = {}, userAccessible = true)
 	@UITopiaVariant(affiliation = UITopiaVariant.EHV, author = INFO.MY_NAME, email = INFO.MY_MAIL)
 	@PluginVariant(variantLabel = "HAIM experiment", requiredParameterLabels = {})
-	public JComponent runExperiment(PluginContext context) {
-		HAIMexperiment exp = new HAIMexperiment();
-		ActTreeNode node = exp.run(context);
+	public ActTreeNode runExperiment(final UIPluginContext context) {
+//		HAIMexperiment exp = new HAIMexperiment();
+		ActTreeNode node = run(context);
 		HierarchyMainPanel panel = new HierarchyMainPanel(context, node);
-		return panel;
+		return node;
 	}
 
 	@Plugin(name = "HAIM experiment vis", returnLabels = { "AHierarchy" }, returnTypes = {
@@ -82,8 +85,8 @@ public class HAIMexperiment {
 	@UITopiaVariant(affiliation = UITopiaVariant.EHV, author = "x.lu", email = "x.lu@tue.nl")
 	@PluginVariant(variantLabel = "HAIM experiment vis", requiredParameterLabels = { 0 })
 	public JComponent visualize(final UIPluginContext context, XLog log) {
-		HAIMexperiment exp = new HAIMexperiment();
-		ActTreeNode node = exp.run(context);
+//		HAIMexperiment exp = new HAIMexperiment();
+		ActTreeNode node = run(context);
 		HierarchyMainPanel panel = new HierarchyMainPanel(context, node);
 
 		return panel;
@@ -96,11 +99,11 @@ public class HAIMexperiment {
 
 	public ActTreeNode run(PluginContext context) {
 
-		String outputf = ".\\out\\test3vumc\\";
+		String outputf = "./outICPM/";
 		PrintWriter resWriter = UtilIO.createWriter(outputf + "res.csv", this.columnNames);
 
 		List<String> lognames = new ArrayList<>();
-//		lognames.add("BPIC12"); //gz
+		lognames.add("BPIC12"); //gz
 //		lognames.add("BPIC17"); //gz
 //		lognames.add("BPIC17f"); //gz
 		
@@ -118,26 +121,27 @@ public class HAIMexperiment {
 		
 //		lognames.add("Kidney17");
 //		lognames.add("Diabetes17");
-		lognames.add("HNTumor17");
+//		lognames.add("HNTumor17");
 		
 		ActTreeNode subproc = null;
 		
 		for(String logname : lognames) {
 //			XLog log = UtilIOXES.importXesLog(logname);
-//			XLog log = UtilIOXES.importXesGZLog(logname);
+			XLog log = UtilIOXES.importXesGZLog(logname);
 
 			
 //		context.getProvidedObjectManager().createProvidedObject(logname, log, XLog.class, context);
 
 		Stopwatch stopwatchHierAct = Stopwatch.createStarted();
 		
-		Object[] temp = UtilDataVUMC.getVUMCLabels(logname);
-		XLog log = (XLog) temp[0];
-//		subproc = (ActTreeNode) temp[1];
+//		Object[] temp = UtilDataVUMC.getVUMCLabels(logname);
+//		XLog log = (XLog) temp[0];
+////		subproc = (ActTreeNode) temp[1];
 		
 		
 		ActivityClusteringAlg calg = null;
-		calg = new ActivityClusteringAlgFull();
+//		calg = new ActivityClusteringAlgFull();
+		calg = new ActivityClusteringAlgFreq();
 //		calg = new ActivityClusteringAlgRandom();
 		subproc = calg.calcActivityHierarchy(log);
 		

@@ -62,18 +62,18 @@ public class AbstractionAwareMiner {
 				Set<String> childLabels = new THashSet<>();
 				Enumeration children = subprocess.children();
 				while (children.hasMoreElements()) {
-					String childLabel = ((ActTreeNode) children.nextElement()).getProcessLabel();
-					childLabels.add(childLabel);
+					ActTreeNode actTreeNode = (ActTreeNode) children.nextElement();
+					String childLabel = actTreeNode.getProcessLabel();
+					if(actTreeNode.isLeaf()) {
+						childLabels.add(childLabel);
+					} else {
+						childLabels.add(createDummyStart(childLabel));
+						childLabels.add(createDummyEnd(childLabel));
+
+					}
 				}
 
-				if (h > 1) {
-					THashSet<String> newChildlabels = new THashSet<>();
-					for (String s : childLabels) {
-						newChildlabels.add(createDummyStart(s));
-						newChildlabels.add(createDummyEnd(s));
-					}
-					childLabels = newChildlabels;
-				}
+	
 
 				XLog[] logs = createSublog(log, subprocess.getProcessLabel(), childLabels);
 				XLog newHighLog = logs[0];

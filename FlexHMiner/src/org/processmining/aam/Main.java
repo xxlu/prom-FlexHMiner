@@ -13,14 +13,18 @@ import javax.swing.SwingUtilities;
 
 import org.deckfour.xes.in.XUniversalParser;
 import org.deckfour.xes.model.XLog;
+import org.processmining.aam.alg.ActivityClusteringAlg;
+import org.processmining.aam.alg.ActivityClusteringAlgFreq;
 import org.processmining.aam.alg.ActivityClusteringAlgRandom;
+import org.processmining.aam.exp.HAIMexperiment;
 import org.processmining.aam.exp.util.ExpDummyPluginContext;
 import org.processmining.aam.exp.util.ExpModelSimplicityUtil;
 import org.processmining.aam.exp.util.ExprReplayUtils;
 import org.processmining.aam.exp.util.ModelQuality;
-import org.processmining.aam.exp.util.UtilIO;
+
 import org.processmining.aam.model.ActTreeNode;
 import org.processmining.aam.model.ActTreeNodeImportExport;
+
 import org.processmining.plugins.graphviz.dot.Dot;
 import org.processmining.plugins.graphviz.dot.Dot2Image;
 import org.processmining.plugins.graphviz.visualisation.DotPanel;
@@ -49,7 +53,9 @@ public class Main {
 //				ActTreeNode root = UtilDataBPI2012.getBPI2012Labels(log);
 			
 				// 1.c use automated clustering
-				ActivityClusteringAlgRandom calg = new ActivityClusteringAlgRandom();
+//				ActivityClusteringAlg calg = new ActivityClusteringAlgRandom();
+				ActivityClusteringAlg calg = new ActivityClusteringAlgFreq();
+				
 				ActTreeNode root = calg.calcActivityHierarchy(log);
 				ActTreeNodeImportExport.exportToFile(root, folder + "BPI12_hierRandom.txt");
 				
@@ -72,6 +78,18 @@ public class Main {
 					export2Image(markedNet, new File(folder + sub.getProcessLabel() + "_" + alg.toString() + "_M.svg"));
 
 				}
+				
+				// Visualize the activity hierarchy
+				JTree tree = new JTree(root);
+				JFrame frame = new JFrame();
+				frame.add(tree);
+
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setTitle("JTree Example");
+				frame.pack();
+				frame.setVisible(true);
+				
+
 			}
 
 			private void export2Image(MarkedPetrinet net, File file) {
