@@ -5,6 +5,10 @@ This project contains the code and examples of results for FlexHMiner. The appro
 - FlexHMiner/src/org/procecessmining/aam/Main.java (to run the example)
 
 
+The details of the approach and its evaluation can be found in: 
+
+Xixi Lu, Avigdor Gal, Hajo A. Reijers (2020). FlexHMiner: Accurate Discovery of Complex Processes
+using Hierarchical Process Models
 
 
 
